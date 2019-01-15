@@ -14,6 +14,7 @@
 		BBC4B25D21ED545100837618 /* DiceDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC4B25C21ED545100837618 /* DiceDeckView.swift */; };
 		BBC4B25F21ED546C00837618 /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC4B25E21ED546C00837618 /* DiceView.swift */; };
 		BBC4B26121ED567B00837618 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC4B26021ED567B00837618 /* Assets.xcassets */; };
+		BBC4B26521EE851300837618 /* Dice_SE.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBC4B26421EE851300837618 /* Dice_SE.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BBC4B25C21ED545100837618 /* DiceDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceDeckView.swift; sourceTree = "<group>"; };
 		BBC4B25E21ED546C00837618 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
 		BBC4B26021ED567B00837618 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBC4B26421EE851300837618 /* Dice_SE.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dice_SE.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		BBC4B23521ED3D1D00837618 = {
 			isa = PBXGroup;
 			children = (
+				BBC4B26421EE851300837618 /* Dice_SE.wav */,
 				BBC4B24021ED3D1D00837618 /* Party Dice */,
 				BBC4B23F21ED3D1D00837618 /* Products */,
 			);
@@ -131,6 +134,7 @@
 				BBC4B24E21ED3D1E00837618 /* LaunchScreen.storyboard in Resources */,
 				BBC4B26121ED567B00837618 /* Assets.xcassets in Resources */,
 				BBC4B24921ED3D1D00837618 /* Main.storyboard in Resources */,
+				BBC4B26521EE851300837618 /* Dice_SE.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

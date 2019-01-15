@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DiceVC: UIViewController {
     
@@ -19,6 +20,7 @@ class DiceVC: UIViewController {
     var allDiceViews:[DiceView] = []
     let diceMoveTime = 0.5
     let numberOfRoundsTheDiceRolls:CGFloat = 3
+    var diceSoundID:SystemSoundID = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,18 +28,16 @@ class DiceVC: UIViewController {
     override func viewDidLayoutSubviews() {
         //初始化骰子边长
         self.diceLength = (self.view.bounds.width)/6
+        //初始化声音文件
+        if let diceSoundURL = Bundle.main.url(forResource: "Dice_SE", withExtension: "wav"){
+            AudioServicesCreateSystemSoundID(diceSoundURL as CFURL, &diceSoundID)
+        }else{
+            print("erro playing the sound effect")
+        }
+        
     }
     
     @IBAction func rollButton(_ sender: UIButton) {
-//        for view in self.deckView.subviews{
-//            view.removeFromSuperview()
-//        }
-//        let pos = getRandomLandingPosition(numberOfPositions: 3)
-//        for stuff in pos{
-//            let v = DiceView(frame:stuff)
-//            v.backgroundImage = UIImage(named: "one")
-//            self.deckView.addSubview(v)
-//        }
         //先搞掉已经存在的骰子
         for diceView in self.deckView.subviews{
             diceView.removeFromSuperview()
@@ -69,8 +69,11 @@ class DiceVC: UIViewController {
             diceView.backgroundImage = diceImage
             
         }
+        //播放音效
+        AudioServicesPlayAlertSound(diceSoundID)
         //动画丢
         let newFrames = getRandomLandingPosition(numberOfPositions: self.numberOfDice)
+        print("statrt the animation")
         for index in 0...self.numberOfDice-1{
             UIView.transition(with: self.allDiceViews[index], duration: self.diceMoveTime, options: [], animations:{ self.allDiceViews[index].frame = newFrames[index]
                 self.allDiceViews[index].transform = CGAffineTransform(rotationAngle: self.numberOfRoundsTheDiceRolls*CGFloat.pi)
@@ -80,10 +83,14 @@ class DiceVC: UIViewController {
     }
     
     @IBAction func addDiceButton(_ sender: Any) {
-        self.numberOfDice+=1
+        if self.numberOfDice+1<=20{
+            self.numberOfDice+=1
+        }
     }
     @IBAction func minusDiceButton(_ sender: Any) {
-        self.numberOfDice-=1
+        if self.numberOfDice-1>0{
+            self.numberOfDice-=1
+        }
     }
     
     @IBOutlet weak var diceNumberLabel: UILabel!
@@ -98,19 +105,23 @@ class DiceVC: UIViewController {
         let boundHeight = self.deckView.bounds.height
         var returnCGRects:[CGRect] = []
         while true {
+            print("while...")
             let randomX = CGFloat(arc4random_uniform(UInt32(boundWidth - self.diceLength)))
+            print(randomX)
             let randomY = CGFloat(arc4random_uniform(UInt32(boundHeight - self.diceLength)))
             
             var doNotCollide = true
             //判断生成的骰子会不会重叠
             for cgrect in returnCGRects{
-                if abs(cgrect.minX - randomX)<self.diceLength || abs(cgrect.minY - randomY)<self.diceLength{
+                if abs(cgrect.minX - randomX)<self.diceLength && abs(cgrect.minY - randomY)<self.diceLength{
                     doNotCollide = false
+                    print("collide")
                     break
                 }
             }
             if doNotCollide{
                 returnCGRects.append(CGRect(x: randomX, y: randomY, width: self.diceLength, height: self.diceLength))
+                print("no collide")
                 print(numberOfPositions)
                 numberOfPositions -= 1
                 if numberOfPositions == 0{
