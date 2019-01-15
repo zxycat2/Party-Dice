@@ -23,21 +23,27 @@ class DiceVC: UIViewController {
     var diceSoundID:SystemSoundID = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    override func viewDidLayoutSubviews() {
-        //初始化骰子边长
-        self.diceLength = (self.view.bounds.width)/6
         //初始化声音文件
         if let diceSoundURL = Bundle.main.url(forResource: "Dice_SE", withExtension: "wav"){
             AudioServicesCreateSystemSoundID(diceSoundURL as CFURL, &diceSoundID)
         }else{
             print("erro playing the sound effect")
         }
+        //监视动作
+        UIApplication.shared.applicationSupportsShakeToEdit = true
         
     }
     
-    @IBAction func rollButton(_ sender: UIButton) {
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        self.rollButton()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        //初始化骰子边长
+        self.diceLength = (self.view.bounds.width)/6
+    }
+    
+    @IBAction func rollButton(_ sender: UIButton? = nil) {
         //先搞掉已经存在的骰子
         for diceView in self.deckView.subviews{
             diceView.removeFromSuperview()

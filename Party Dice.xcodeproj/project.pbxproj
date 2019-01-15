@@ -44,7 +44,7 @@
 		BBC4B23521ED3D1D00837618 = {
 			isa = PBXGroup;
 			children = (
-				BBC4B26421EE851300837618 /* Dice_SE.wav */,
+				BBC4B26721EE8CCB00837618 /* Sound */,
 				BBC4B24021ED3D1D00837618 /* Party Dice */,
 				BBC4B23F21ED3D1D00837618 /* Products */,
 			);
@@ -71,6 +71,15 @@
 				BBC4B26021ED567B00837618 /* Assets.xcassets */,
 			);
 			path = "Party Dice";
+			sourceTree = "<group>";
+		};
+		BBC4B26721EE8CCB00837618 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				BBC4B26421EE851300837618 /* Dice_SE.wav */,
+			);
+			name = Sound;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
