@@ -8,17 +8,64 @@
 
 import UIKit
 
-class SettingPageVC: UITableViewController {
-
+class SettingPageVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    //控制picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.pickerModel.count
+    }
+    //pickerc的model
+    let pickerModel = ["Just Black", "Light Gray", "Dark Gray", "Light Blue", "Dark Blue"]
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.pickerModel[row]
+    }
+    
+    //UserDefaults
+    let StandarUserDefault = UserDefaults.standard
+    //didLoad, 根据UserDefault初始化
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.clearsSelectionOnViewWillAppear = false
+        self.backgroudColorPicker.dataSource = self
+        self.backgroudColorPicker.delegate = self
+        //初始化switch和picker
+        self.soundSwitchOulet.setOn(self.StandarUserDefault.bool(forKey: "DiceAppSoundSwitch"), animated: false)
+        self.vibrationSwitchOutlet.setOn(self.StandarUserDefault.bool(forKey: "DiceAppvibrationSwitch"), animated: false)
+        self.shakeToRollSwitchOutlet.setOn(self.StandarUserDefault.bool(forKey: "DiceAppshakeToRollSwitch"), animated: false)
+        self.backgroudColorPicker.selectRow(self.StandarUserDefault.integer(forKey: "DiceAppBackgroundColorNumber"), inComponent: 0, animated: false)
+        
     }
+    //pick后
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.StandarUserDefault.set(row, forKey: "DiceAppBackgroundColorNumber")
+    }
+    //一堆switch
+    
+    @IBOutlet weak var soundSwitchOulet: UISwitch!
+    @IBAction func soundSwitch(_ sender: UISwitch) {
+        self.StandarUserDefault.set(self.soundSwitchOulet.isOn, forKey: "DiceAppSoundSwitch")
+    }
+    
+    @IBOutlet weak var vibrationSwitchOutlet: UISwitch!
+    @IBAction func vivrationSwitch(_ sender: UISwitch) {
+        self.StandarUserDefault.set(self.vibrationSwitchOutlet.isOn, forKey: "DiceAppvibrationSwitch")
+    }
+    
+    @IBOutlet weak var shakeToRollSwitchOutlet: UISwitch!
+    @IBAction func shakeToRollSwitch(_ sender: UISwitch) {
+        self.StandarUserDefault.set(self.shakeToRollSwitchOutlet.isOn, forKey: "DiceAppshakeToRollSwitch")
+    }
+    @IBOutlet weak var backgroudColorPicker: UIPickerView!
+    
+    
+    
+    
+    
+    
+    
 
     // MARK: - Table view data source
 

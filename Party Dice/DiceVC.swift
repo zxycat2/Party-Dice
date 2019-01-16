@@ -32,6 +32,7 @@ class DiceVC: UIViewController {
         //监视动作
         UIApplication.shared.applicationSupportsShakeToEdit = true
         
+        
     }
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
