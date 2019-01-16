@@ -15,6 +15,7 @@
 		BBC4B25F21ED546C00837618 /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC4B25E21ED546C00837618 /* DiceView.swift */; };
 		BBC4B26121ED567B00837618 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC4B26021ED567B00837618 /* Assets.xcassets */; };
 		BBC4B26521EE851300837618 /* Dice_SE.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBC4B26421EE851300837618 /* Dice_SE.wav */; };
+		BBD44A6721EFADE7002DDF3A /* SettingPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD44A6621EFADE7002DDF3A /* SettingPageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BBC4B25E21ED546C00837618 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
 		BBC4B26021ED567B00837618 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC4B26421EE851300837618 /* Dice_SE.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Dice_SE.wav; sourceTree = "<group>"; };
+		BBD44A6621EFADE7002DDF3A /* SettingPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				BBC4B24121ED3D1D00837618 /* AppDelegate.swift */,
 				BBC4B25521ED473100837618 /* DiceVC.swift */,
 				BBC4B24721ED3D1D00837618 /* Main.storyboard */,
+				BBD44A6621EFADE7002DDF3A /* SettingPageVC.swift */,
 				BBC4B25C21ED545100837618 /* DiceDeckView.swift */,
 				BBC4B25E21ED546C00837618 /* DiceView.swift */,
 				BBC4B24C21ED3D1E00837618 /* LaunchScreen.storyboard */,
@@ -158,6 +161,7 @@
 				BBC4B25F21ED546C00837618 /* DiceView.swift in Sources */,
 				BBC4B24221ED3D1D00837618 /* AppDelegate.swift in Sources */,
 				BBC4B25621ED473100837618 /* DiceVC.swift in Sources */,
+				BBD44A6721EFADE7002DDF3A /* SettingPageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,12 +49,14 @@ class DiceVC: UIViewController {
             diceView.removeFromSuperview()
         }
         self.allDiceViews = []
+        var dicePoints:UInt32 = 0
         //生成，放到左上角
         for _ in 1...self.numberOfDice{
             let diceView = DiceView(frame:CGRect(x: 0, y: 0, width: self.diceLength, height: self.diceLength))
             self.allDiceViews.append(diceView)
             self.deckView.addSubview(diceView)
             let randomNumber = arc4random_uniform(6) + 1
+            dicePoints+=randomNumber
             var diceImage = UIImage(named: "pic")
             switch randomNumber{
             case 1:
@@ -73,8 +75,9 @@ class DiceVC: UIViewController {
                 diceImage = UIImage(named: "pic")
             }
             diceView.backgroundImage = diceImage
-            
         }
+        //显示骰子点数
+        self.navigationItem.title = String(dicePoints)
         //播放音效
         AudioServicesPlayAlertSound(diceSoundID)
         //动画丢
