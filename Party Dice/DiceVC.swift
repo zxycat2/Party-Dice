@@ -21,16 +21,37 @@ class DiceVC: UIViewController {
     let diceMoveTime = 0.5
     let numberOfRoundsTheDiceRolls:CGFloat = 3
     var diceSoundID:SystemSoundID = 0
+    
+    var ifPlaySound = true
+    var ifVibrate = true
+    var shakeToRoll = true
+    var baakgroundColorNumber = 1
+    
+    let userDefault = UserDefaults.standard
+    let allBackgroundColorOptions = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //根据设置初始化
+        self.ifPlaySound = self.userDefault.bool(forKey: "DiceAppSoundSwitch")
+        self.ifVibrate = self.userDefault.bool(forKey: "DiceAppvibrationSwitch")
+        self.shakeToRoll = self.userDefault.bool(forKey: "DiceAppshakeToRollSwitch")
+        self.baakgroundColorNumber = self.userDefault.integer(forKey: "DiceAppBackgroundColorNumber")
+        //监视动作
+        UIApplication.shared.applicationSupportsShakeToEdit = self.shakeToRoll
+        //初始化背景
+        self.deckView.backgroundColor = self.allBackgroundColorOptions[self.baakgroundColorNumber]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //初始化声音文件
         if let diceSoundURL = Bundle.main.url(forResource: "Dice_SE", withExtension: "wav"){
             AudioServicesCreateSystemSoundID(diceSoundURL as CFURL, &diceSoundID)
         }else{
             print("erro playing the sound effect")
         }
-        //监视动作
-        UIApplication.shared.applicationSupportsShakeToEdit = true
+        
+        
         
         
     }
@@ -79,8 +100,14 @@ class DiceVC: UIViewController {
         }
         //显示骰子点数
         self.navigationItem.title = String(dicePoints)
-        //播放音效
-        AudioServicesPlayAlertSound(diceSoundID)
+        //播放音效, 震动
+        if self.ifVibrate{
+            AudioServicesPlaySystemSound(1520)
+        }
+        if self.ifPlaySound{
+            AudioServicesPlaySystemSound(diceSoundID)
+        }
+        
         //动画丢
         let newFrames = getRandomLandingPosition(numberOfPositions: self.numberOfDice)
         print("statrt the animation")
